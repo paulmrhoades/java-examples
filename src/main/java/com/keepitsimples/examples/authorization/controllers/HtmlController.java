@@ -1,5 +1,6 @@
 package com.keepitsimples.examples.authorization.controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -60,7 +61,7 @@ public class HtmlController {
         return "*** THIS IS PROTECTED ***";
     }
 
-    // @RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin")
     public String admin_page() {
         logger.info("/admin' called");
