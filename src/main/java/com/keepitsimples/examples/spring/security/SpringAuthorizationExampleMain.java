@@ -1,4 +1,4 @@
-package com.keepitsimples.examples.authorization;
+package com.keepitsimples.examples.spring.security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

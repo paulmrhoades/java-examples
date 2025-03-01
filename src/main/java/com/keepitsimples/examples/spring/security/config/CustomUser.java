@@ -1,4 +1,4 @@
-package com.keepitsimples.examples.authorization.config;
+package com.keepitsimples.examples.spring.security.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

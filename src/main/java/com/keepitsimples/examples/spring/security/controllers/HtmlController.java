@@ -1,4 +1,4 @@
-package com.keepitsimples.examples.authorization.controllers;
+package com.keepitsimples.examples.spring.security.controllers;
 
 import jakarta.annotation.security.RolesAllowed;
 import org.apache.commons.logging.Log;

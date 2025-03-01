@@ -1,4 +1,4 @@
-package com.keepitsimples.examples.authorization.config;
+package com.keepitsimples.examples.spring.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
