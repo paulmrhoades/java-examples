@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 @RestController
 public class HtmlController {
 
-    private static final String RESOURCE_DIR = "src/main/resources/authorization/";
+    private static final String RESOURCE_DIR = "src/main/resources/security/";
 
     private static final Log logger = LogFactory.getLog(HtmlController.class);
 

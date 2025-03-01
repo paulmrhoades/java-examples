@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Created by Paul Rhoades on 14/02/2025.
  */
 @SpringBootApplication
-public class SpringAuthorizationExampleMain {
+public class SpringSecurityExampleMain {
     public static void main(String[] args) {
-        SpringApplication.run(SpringAuthorizationExampleMain.class, args);
+        final SpringApplication app = new SpringApplication(SpringSecurityExampleMain.class);
+        app.setAdditionalProfiles("security");
+        app.run(args);
     }
 }
