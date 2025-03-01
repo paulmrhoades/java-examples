@@ -61,10 +61,14 @@ public class HtmlController {
     private String html(String html_file, String message, Authentication authentication) {
         String html = "*** OOPS SOMETHING WENT WRONG ***";
         try {
-            final Path path = Paths.get(HTML_DIR + html_file);
-            html = Files.readString(path);
+            final Path html_path = Paths.get(HTML_DIR + html_file);
+            html = Files.readString(html_path);
             html = html.replace("#NAME#", name(authentication));
             html = html.replace("#MESSAGE#", message);
+
+            final Path css_path = Paths.get( HTML_DIR + "styles.css");
+            final String css = Files.readString(css_path);
+            html = html.replace("#STYLES#", css);
         } catch (Exception ioe) {
             ioe.printStackTrace();
         }

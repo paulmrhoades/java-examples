@@ -1,0 +1,15 @@
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      color: blue;
+    }
+    ul {
+      padding: 0px 0px;
+      list-style-type: none;
+    }
+    li {
+      padding: 5px 20px;
+      font-size: 20px;
+    }
