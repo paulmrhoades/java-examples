@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,56 +24,59 @@ public class HtmlController {
     @GetMapping("/")
     public String home_page(Authentication authentication) {
         logger.info("'/' called");
-        if (authentication != null && authentication.isAuthenticated()) {
-            return read("home.html");
-        } else {
-            return read("index.html");
-        }
-    }
-
-    @GetMapping(value = "/authorities")
-    public String authorities(Authentication authentication) {
-        return authentication.getName() + authentication.getAuthorities();
-    }
-
-    @GetMapping("/login")
-    public String login_page() {
-        logger.info("'/login' called");
-        return read("login.html");
+        return html("template.html", "This is the 'Home Page'", authentication);
     }
 
     @GetMapping("/denied")
-    public String denied_page() {
+    public String denied_page(Authentication authentication) {
         logger.info("'/denied' called");
-        return "*** DENIED ***";
+        return html("template.html", "You were DENIED access to the page you just attempted", authentication);
     }
 
     @GetMapping("/unprotected")
-    public String unprotected_page() {
+    public String unprotected_page(Authentication authentication) {
         logger.info("'/unprotected' called");
-        return "*** THIS IS UNPROTECTED ***";
+        return html("template.html", "You can access this page because it is NOT PROTECTED.", authentication);
     }
 
     @GetMapping("/protected")
-    public String protected_page() {
-        logger.info("/protected' called");
-        return "*** THIS IS PROTECTED ***";
+    public String protected_page(Authentication authentication) {
+        logger.info("'/protected' called");
+        return html("template.html", "You need to be AUTHENTICATED to see this page, so you must have logged in as 'user' or 'admin' to see it.", authentication);
     }
 
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("ADMINISTRATOR")
     @GetMapping("/admin")
-    public String admin_page() {
+    public String admin_page(Authentication authentication) {
         logger.info("/admin' called");
-        return "*** ADMIN ***";
+        return html("template.html", "You need to be AUTHENTICATED with 'ROLE = ADMINISTRATOR' to see this page, so you must have logged in as 'admin' to see it.", authentication);
     }
 
-    private final String read(String filename) {
+    @GetMapping("/login")
+    public String login_page(Authentication authentication) {
+        logger.info("'/login' called");
+        return html("login_page.html", "", authentication);
+    }
+
+    private String html(String html_file, String message, Authentication authentication) {
+        String html = "*** OOPS SOMETHING WENT WRONG ***";
         try {
-            final Path path = Paths.get(HTML_DIR + filename);
-            return Files.readString(path);
-        } catch (IOException ioe) {
+            final Path path = Paths.get(HTML_DIR + html_file);
+            html = Files.readString(path);
+            html = html.replace("#NAME#", name(authentication));
+            html = html.replace("#MESSAGE#", message);
+        } catch (Exception ioe) {
             ioe.printStackTrace();
         }
-        return "";
+        return html;
     }
+
+    private boolean is_authenticated(Authentication authentication) {
+        return authentication != null && authentication.isAuthenticated();
+    }
+
+    private String name(Authentication authentication) {
+        return is_authenticated(authentication) ? authentication.getName() : "Anonymous" ;
+    }
+
 }
