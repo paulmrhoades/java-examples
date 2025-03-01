@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SCRATCH</title>
+  <style>
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      color: blue;
+    }
+
+    div.container {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+    div.nav {
+      flex-grow: 0;
+      padding: 5px 20px;
+    }
+    div.nav-row {
+      padding-bottom: 2px;
+    }
+    div.login {
+      flex-grow: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 8px;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+    div.login-row {
+      padding-top: 8px;
+    }
+    div.label {
+      display: inline-block;
+      width: 75px;
+    }
+  </style>
+</head>
+<body>
+<h1>Hello 'Anonymous'</h1>
+<h2>This is the 'Home Page'</h2>
+<div class="container">
+  <div class="login">
+    <form method="post" action="/login" >
+      <div class="login-row"><div class="label">Currently:</div>'#NAME#'</div>
+      <div class="login-row"><div class="label">Username:</div><input type="text" name="username" placeholder="use 'User1' or 'User2'"/></div>
+      <div class="login-row"><div class="label">Password:</div><input type="password" name="password" placeholder="use 'pw'"/></div>
+      <div class="login-row"><div class="label"></div><input type="submit" value="Log in"/> <input type="button" onclick="location.href='/logout'" value="Log out"/></div>
+    </form>
+  </div>
+  <div class="nav">
+    <div class="nav-row"><b>Links</b></div>
+    <div class="nav-row"><a href="/">Home Page</a></div>
+    <div class="nav-row"><a href="/unprotected">Unprotected Page</a></div>
+    <div class="nav-row"><a href="/protected">Protected Page</a></div>
+    <div class="nav-row"><a href="/admin">Admin Page</a></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>#TITLE#</title>
+  <style>
+    #STYLES#
+  </style>
+</head>
+<body>
+  <h1>#MESSAGE#</h1>
+  <div class="container">
+    <div class="login">
+      <form method="post" action="/login" >
+        <div class="login-row"><div class="label">Currently:</div><div class="item">#NAME#</div></div>
+        <div class="login-row"><div class="label">Username:</div><div class="item"><input class="text" type="text" name="username" placeholder="use 'User1' or 'User2'"/></div></div>
+        <div class="login-row"><div class="label">Password:</div><div class="item"><input class="text" type="password" name="password" placeholder="use 'pw'"/></div></div>
+        <div class="login-row"><div class="label"></div><div class="item"><input type="submit" value="Log in"/> <input type="button" onclick="location.href='/logout'" value="Log out"/></div></div>
+      </form>
+    </div>
+    <div class="nav">
+      <div class="nav-row"><b>Links</b></div>
+      <div class="nav-row"><a href="/">Home Page</a></div>
+      <div class="nav-row"><a href="/unprotected">Unprotected Page</a></div>
+      <div class="nav-row"><a href="/protected">Protected Page</a></div>
+      <div class="nav-row"><a href="/admin">Admin Page</a></div>
+    </div>
+  </div>
+</body>
+</html>

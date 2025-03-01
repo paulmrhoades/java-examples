@@ -5,11 +5,39 @@
     a:hover {
       color: blue;
     }
-    ul {
-      padding: 0px 0px;
-      list-style-type: none;
+
+    input.text {
+      width: 180px;
     }
-    li {
+
+    div.container {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+
+    div.login {
+      flex-grow: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 8px;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+    div.login-row {
+      padding-top: 8px;
+    }
+    div.label {
+      display: inline-block;
+      width: 75px;
+    }
+    div.item {
+      display: inline-block;
+    }
+
+    div.nav {
+      flex-grow: 0;
       padding: 5px 20px;
-      font-size: 20px;
+    }
+    div.nav-row {
+      padding-bottom: 2px;
     }

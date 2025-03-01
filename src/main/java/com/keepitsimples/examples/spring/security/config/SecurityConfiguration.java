@@ -31,7 +31,7 @@ public class SecurityConfiguration  {
              .authorizeHttpRequests(auth -> auth
                  .requestMatchers("/", "/login", "/logout", "/unprotected").permitAll()
                  .anyRequest().authenticated())
-             .formLogin((form) -> form.loginPage("/login"))
+             .formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/", true))
              .logout(lo -> lo.logoutSuccessUrl("/"))
              .exceptionHandling(e -> e.accessDeniedPage("/denied"));
         return http.build();
@@ -49,14 +49,14 @@ public class SecurityConfiguration  {
     public UserDetailsService userDetailsService() {
         final String password = passwordEncoder().encode("pw");
         UserDetails user1 = CustomUser
-            .forUsername("user")
+            .forUsername("User1")
             .withEncodedPassword(password)
-            .withRoles("GENERAL_USER")
+            .withRoles("GENERAL")
             .build();
         UserDetails user2 = CustomUser
-            .forUsername("admin")
+            .forUsername("User2")
             .withEncodedPassword(password)
-            .withRoles("ADMINISTRATOR")
+            .withRoles("ADMIN")
             .build();
         return new InMemoryUserDetailsManager(user1, user2);
     }

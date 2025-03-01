@@ -17,56 +17,57 @@ import java.nio.file.Paths;
 @RestController
 public class HtmlController {
 
-    private static final String HTML_DIR = "src/main/resources/authorization/";
+    private static final String RESOURCE_DIR = "src/main/resources/authorization/";
 
     private final Log logger = LogFactory.getLog(HtmlController.class);
 
     @GetMapping("/")
     public String home_page(Authentication authentication) {
         logger.info("'/' called");
-        return html("template.html", "This is the 'Home Page'", authentication);
+        return html("page_template.html", "Home Page", "This is the 'Home Page'", authentication);
     }
 
     @GetMapping("/denied")
     public String denied_page(Authentication authentication) {
         logger.info("'/denied' called");
-        return html("template.html", "You were DENIED access to the page you just attempted", authentication);
+        return html("page_template.html", "Access Denies", "You were DENIED access to this page.", authentication);
     }
 
     @GetMapping("/unprotected")
     public String unprotected_page(Authentication authentication) {
         logger.info("'/unprotected' called");
-        return html("template.html", "You can access this page because it is NOT PROTECTED.", authentication);
+        return html("page_template.html", "Unprotected Page", "You can access this page because it is NOT PROTECTED.", authentication);
     }
 
     @GetMapping("/protected")
     public String protected_page(Authentication authentication) {
         logger.info("'/protected' called");
-        return html("template.html", "You need to be AUTHENTICATED to see this page, so you must have logged in as 'user' or 'admin' to see it.", authentication);
+        return html("page_template.html", "Protected Page", "You are ALLOWED to see this page because you are logged in.", authentication);
     }
 
-    @RolesAllowed("ADMINISTRATOR")
+    @RolesAllowed("ADMIN")
     @GetMapping("/admin")
     public String admin_page(Authentication authentication) {
         logger.info("/admin' called");
-        return html("template.html", "You need to be AUTHENTICATED with 'ROLE = ADMINISTRATOR' to see this page, so you must have logged in as 'admin' to see it.", authentication);
+        return html("page_template.html", "Admin Page", "You are ALLOWED to see this page as you are logged in as a User with [Role=ADMIN]", authentication);
     }
 
     @GetMapping("/login")
     public String login_page(Authentication authentication) {
         logger.info("'/login' called");
-        return html("login_page.html", "", authentication);
+        return html("page_template.html", "Login Page","Please login...", authentication);
     }
 
-    private String html(String html_file, String message, Authentication authentication) {
+    private String html(String html_file, String title, String message, Authentication authentication) {
         String html = "*** OOPS SOMETHING WENT WRONG ***";
         try {
-            final Path html_path = Paths.get(HTML_DIR + html_file);
+            final Path html_path = Paths.get(RESOURCE_DIR + html_file);
             html = Files.readString(html_path);
+            html = html.replace("#TITLE#", title);
             html = html.replace("#NAME#", name(authentication));
             html = html.replace("#MESSAGE#", message);
 
-            final Path css_path = Paths.get( HTML_DIR + "styles.css");
+            final Path css_path = Paths.get( RESOURCE_DIR + "styles.css");
             final String css = Files.readString(css_path);
             html = html.replace("#STYLES#", css);
         } catch (Exception ioe) {
@@ -80,7 +81,7 @@ public class HtmlController {
     }
 
     private String name(Authentication authentication) {
-        return is_authenticated(authentication) ? authentication.getName() : "Anonymous" ;
+        return is_authenticated(authentication) ? "'" + authentication.getName() + "' " + authentication.getAuthorities() : "'Anonymous'" ;
     }
 
 }
