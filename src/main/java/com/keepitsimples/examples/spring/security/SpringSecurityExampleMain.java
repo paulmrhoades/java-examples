@@ -8,9 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class SpringSecurityExampleMain {
+
     public static void main(String[] args) {
         final SpringApplication app = new SpringApplication(SpringSecurityExampleMain.class);
         app.setAdditionalProfiles("security");
         app.run(args);
     }
 }
+
+
