@@ -1,13 +1,13 @@
-package com.keepitsimples.examples.spring;
+package com.keepitsimples.examples.jdbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
-public class ScratchMain {
+public class MySqlJdbcExampleMain {
 
-    private static final Logger logger = LoggerFactory.getLogger(ScratchMain.class);
+    private static final Logger logger = LoggerFactory.getLogger(MySqlJdbcExampleMain.class);
 
     public static void main(String... args) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
